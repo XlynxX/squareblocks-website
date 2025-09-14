@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Minecraft Сервер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .server-info {
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #00ff88;
+            font-size: 1.1em;
+        }
+
+        .server-ip {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .ip-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 15px;
+            user-select: all;
+        }
+
+        .connect-btn {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 12px 25px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .mods-section {
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #00ccff;
+        }
+
+        .mod-item {
+            background: rgba(0, 204, 255, 0.1);
+            border: 1px solid rgba(0, 204, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .mod-name {
+            font-weight: 600;
+            color: #00ccff;
+            margin-bottom: 5px;
+        }
+
+        .mod-description {
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .discord { border-color: #5865f2; }
+        .discord:hover { background: rgba(88, 101, 242, 0.2); }
+
+        .telegram { border-color: #0088cc; }
+        .telegram:hover { background: rgba(0, 136, 204, 0.2); }
+
+        .vk { border-color: #0077ff; }
+        .vk:hover { background: rgba(0, 119, 255, 0.2); }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .logo h1 {
+                font-size: 2em;
+            }
+            
+            .connect-btn, .copy-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>squareblocks</h1>
+        </div>
+
+        <div class="server-info">
+            <div class="info-row">
+                <span class="info-label">Версия сервера:</span>
+                <span class="info-value">1.21.8</span>
+            </div>
+        </div>
+
+        <div class="server-ip">
+            <div class="ip-text" id="serverIP">mc.squareblocks.eu</div>
+            <button class="connect-btn" onclick="connectToServer()">Подключиться</button>
+            <button class="copy-btn" onclick="copyIP(this, event)">Скопировать IP</button>
+        </div>
+
+        <div class="mods-section">
+            <h3 class="section-title">Необходимые моды</h3>
+            <div class="mod-item">
+                <div class="mod-name">Simple Voice Chat</div>
+                <div class="mod-description">Голосовой чат для общения с игроками на сервере. Скачайте с CurseForge или Modrinth.</div>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://discord.gg/yourserver" class="social-link discord" title="Discord">
+                <svg viewBox="-7 0 38 24" style="fill: #5865F2;">
+                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z"/>
+                </svg>
+            </a>
+            <a href="https://t.me/yourserver" class="social-link telegram" title="Telegram">
+                <svg viewBox="-9 0 48 24" style="fill:rgb(0, 136, 204)">
+                    <path d="m9.417 15.181-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.93 3.821l.001-.001c.321-1.496-.541-2.081-1.527-1.714l-21.29 8.151c-1.453.564-1.431 1.374-.247 1.741l5.443 1.693L18.953 5.78c.595-.394 1.136-.176.691.218z"/>
+                </svg>
+            </a>
+            <!-- <a href="https://vk.com/yourserver" class="social-link vk" title="VKontakte">
+                <svg viewBox="-4 0 32 24">
+                    <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zM18.947 16.811c-.441.621-.893.73-1.265.767-.141.014-.266 0-.359 0-.562 0-1.016-.285-1.537-.871-.474-.533-.914-1.055-1.869-1.161-.938-.105-1.416.582-1.416 1.457 0 .582.227 1.117.227 1.117s-1.324.133-2.297-.918c-.876-.947-1.846-2.877-1.846-2.877S7.883 12.055 8.531 12c.648-.055 1.297.984 1.297.984s.688 1.289 1.438 1.758c.492.309.938.309 1.266.059s.422-.723.422-.723 1.453.141 2.547-.832c1.039-.926 1.359-1.953 1.359-1.953s.797.07 1.078-.453c.281-.524-.047-1.023-.047-1.023s.984-2.133-.609-2.695c-1.578-.555-3.234.855-3.234.855s-1.078-2.348-3.047-2.438c-1.969-.09-2.531 1.758-2.531 1.758s-.609-1.477-2.25-1.055c-1.641.422-1.406 2.039-1.406 2.039s-1.125-.211-1.641.633-.281 1.617-.281 1.617.234.809 1.031.949c.797.141 1.359-.434 1.359-.434s.211 2.18 1.477 3.094c1.266.914 2.766.527 2.766.527s.844.789 2.25.648c1.406-.141 1.969-1.336 1.969-1.336s1.688.492 2.625-.703c.914-1.172.539-2.484.539-2.484s1.078.281 1.336-1.055c.258-1.336-1.055-1.758-1.055-1.758s-.281-1.523-1.828-1.406c-1.547.117-1.922 1.805-1.922 1.805s-1.477-.797-2.414.141c-.938.938-.469 2.344-.469 2.344s-1.664-.211-2.25 1.242c-.586 1.453.375 2.625.375 2.625z"/>
+                </svg>
+            </a> -->
+        </div>
+    </div>
+
+    <script>
+        function copyIP(element, event) {
+            const ip = document.getElementById('serverIP').textContent;
+            navigator.clipboard.writeText(ip).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Скопировано!';
+                btn.style.background = 'rgba(0, 255, 136, 0.3)';
+                btn.style.transition = 'background 1.5s'
+            });
+        }
+
+        function connectToServer() {
+            const ip = document.getElementById('serverIP').textContent;
+            window.location.href = `minecraft://${ip}`;
+        }
+
+        // Добавляем анимацию частиц в фон
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 2px;
+                height: 2px;
+                background: rgba(0, 255, 136, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                left: ${Math.random() * 100}vw;
+                top: 100vh;
+                animation: floatUp ${3 + Math.random() * 4}s linear forwards;
+                z-index: -1;
+            `;
+            document.body.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 7000);
+        }
+
+        // Создаем стиль для анимации частиц
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                to {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Создаем частицы каждые 2 секунды
+        setInterval(createParticle, 2000);
+    </script>
+</body>
+</html>
